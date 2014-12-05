@@ -1,0 +1,16 @@
+bin/AWS/AWS.SessionProvider.xml
+src/ngtdiServer/Web.config
+src/ngtdiServer/bin/AWSSDK.xml
+src/ngtdiServer/bin/
+src/ngtdiLibrary/obj/
+src/ngtdiLibrary/bin/
+*.user
+src/ngtdiConsole/bin/
+*.suo
+src/ngtdiServer/obj/
+src/ngtdiServer/packages/Nancy.Hosting.Aspnet.0.23.2/
+src/ngtdiServer/packages/Nancy.Authentication.Forms.0.23.2/
+src/ngtdiServer/packages/Nancy.0.23.2/
+src/ngtdiConsole/obj/
+bin/AWS/AWSSDK.xml
+src/ngtdiConsole/App.config

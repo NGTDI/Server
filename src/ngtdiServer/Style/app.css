@@ -1,0 +1,55 @@
+﻿body {
+}
+
+.entry_row {
+    min-height: 40px;
+    padding-bottom: 5px;
+}
+
+.entry_label {
+    vertical-align: text-top;
+    font-size: 18px;
+    margin-top: 0 !important;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+}
+
+.entry_description {
+    border-width: 1px;
+    border-radius: 8px;
+    border-style: solid;
+    padding: 10px 10px 0 10px;
+    background: #FFFFE0;
+    
+}
+
+.entry_description_line 
+{
+    clear:both;
+    padding-bottom: 10px;
+    vertical-align: text-top;
+    font-size: 14px;
+    margin-top: 0 !important;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+}
+
+.entry_value {
+    
+}
+
+.text_entry_row {
+    height: 400px;
+}
+
+.jqte 
+{
+    min-height: 400px;
+    width: 100%;
+    margin-top: 10px !important;
+}
+

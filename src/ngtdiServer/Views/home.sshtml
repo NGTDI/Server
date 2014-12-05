@@ -1,0 +1,13 @@
+﻿@Master['master.sshtml']
+
+@Section['Title']
+Not Going To Do It
+@EndSection
+
+@Section['Head']
+
+@EndSection
+
+@Section['Content']
+<p>The Anti-Resolution Site</p>
+@EndSection

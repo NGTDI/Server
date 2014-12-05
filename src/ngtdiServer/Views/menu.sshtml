@@ -1,0 +1,24 @@
+﻿<div class="menu_container">
+  <script>
+    $(function() { $( "#menu" ).menu(); });
+  </script>
+  
+  <ul id="menu">
+    <li><a href="/home">Home</a></li>
+    <li>
+      <a href="/addantiresolution">Add Anti-Resolution</a>
+    </li>
+	  <li>
+      <a href="/myantiresolutions">My Anti-Resolutions</a>
+    </li>
+	  @If.Context.CurrentUser.IsSuperUser
+    <li><a href="/reviewtags">Manage Users</a></li>
+    @EndIf
+    <li>
+      <a href="/changepassword">Change Password</a>
+    </li>
+    <li>
+      <a href="/logout">Logout</a>
+    </li>
+  </ul>
+</div>

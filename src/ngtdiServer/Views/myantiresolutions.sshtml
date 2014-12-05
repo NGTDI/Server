@@ -1,0 +1,38 @@
+﻿@Master['master.sshtml']
+
+@Section['Title']
+My Anti-Resolutions
+@EndSection
+
+@Section['Head']
+	<link rel="stylesheet" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
+	<script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+	<style>
+	  #ars_table { min-height:400px; width:100% }
+	</style>
+@EndSection
+
+@Section['Content']
+   <script>
+		$( document ).ready(function() {
+			GetMyAntiResolutions();
+		});
+	</script>
+
+    <table id="ars_table" class="stripe" cellspacing="0">
+		<thead>
+			<tr>
+				<th>Type</th>
+				<th>Period</th>
+				<th>Anti-Resolution</th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<th>Type</th>
+				<th>Period</th>
+				<th>Anti-Resolution</th>
+			</tr>
+		</tfoot>
+	</table>
+@EndSection

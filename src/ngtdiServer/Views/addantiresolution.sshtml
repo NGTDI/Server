@@ -1,0 +1,84 @@
+﻿@Master['master.sshtml']
+
+@Section['Title']
+Add Anti-Resolution
+@EndSection
+
+@Section['Head']
+	<script type="text/javascript" src="/js/jquery-te-1.4.0.min.js" charset="utf-8"></script>
+	<link type="text/css" rel="stylesheet" href="/js/jquery-te-1.4.0.css" >
+@EndSection
+
+@Section['Content']
+   <script type="text/javascript" >
+   $( document ).ready( function(){
+		$( "#dateStart" ).datepicker();
+		$( "#dateEnd" ).datepicker();
+
+		$(".editor").jqte({
+			format:false,
+			sub:false,
+			sup:false,
+			link:false,
+			unlink:false,
+			remove:false
+		});
+   } );
+   </script>
+
+   <form >
+	   <div class="row entry_row">
+			<div class="col-md-2 entry_label">Type</div>
+			<div class="col-md-3 entry_value">
+				<div class="row">
+					<div class="col-md-12">
+						<input type="radio" id="radAllYear" name="period" value="All Year" onchange="TypeChange('allyear');"/> All Year
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<input type="radio" id="radBefore" name="period" value="Before" onchange="TypeChange('before');"/> Before
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<input type="radio" id="radAfter" name="period" value="After" onchange="TypeChange('after');"/> After
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<input type="radio" id="radBetween" name="period" value="Between" onchange="TypeChange('between');"/> Between
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<input type="radio" id="radOn" name="period" value="On" onchange=" TypeChange('on');"/> On
+					</div>
+				</div>
+			</div>
+			<div class="col-md-7 entry_description">
+				<div class="entry_description_line">What action are you striving to avoid?</div>
+				<div class="entry_description_line">Select Carefully.</div>
+				<div class="entry_description_line">Failing to do something is problem, but failing to not do something is a whole nother story. </div>
+			</div>
+	   </div>
+	   <div class="row entry_row" id="rowStart">
+			<div class="col-md-2 entry_label">Start Date</div>
+			<div class="col-md-10 entry_value">
+				<input type="text" id="dateStart"/>
+			</div>
+		</div>
+		<div class="row entry_row" id="rowEnd">
+			<div class="col-md-2 entry_label">End Date</div>
+			<div class="col-md-10 entry_value">
+				<input type="text" id="dateEnd"/>
+			</div>
+		</div>
+	   <div class="row text_entry_row">
+			<div class="col-md-12"><h4>Anti-Resolution</h4>
+				<div class="editor" id="txtAntiResolution" name="txtAntiResolution">
+				</div>
+			</div>
+	   </div>
+   </form>
+@EndSection
