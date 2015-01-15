@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Security.Cryptography;
+using System.Text;
+using BCN.Library.Security;
 using TreeGecko.Library.Common.Objects;
+using TreeGecko.Library.Common.Security;
 
 namespace NGTDI.Library.Objects
 {
@@ -30,6 +34,30 @@ namespace NGTDI.Library.Objects
             StartDate = _tgs.GetNullableDateTime("StartDate");
             EndDate = _tgs.GetNullableDateTime("EndDate");
             Text = _tgs.GetString("Text");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_user"></param>
+        /// <param name="_antiresolution"></param>
+        public void SetAntiResolutionText(User _user, string _antiresolution)
+        {
+            CryptoString cs = new CryptoString(_user.Key, _user.Salt);
+
+            Text = cs.Encrypt(_antiresolution);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_user"></param>
+        /// <returns></returns>
+        public string GetAntiResolutionText(User _user)
+        {
+            CryptoString cs = new CryptoString(_user.Key, _user.Salt);
+
+            return cs.Decrypt(Text);
         }
     }
 }

@@ -9,6 +9,7 @@ Login
 
 @Section['Content']
 	<form id="loginform" action="javascript:login();">
+		<input type="hidden" id="hidEulaGuid">
 		<div class="row">
 			<div class="col-md-3"> 
 				<label for="user">Username</label>
@@ -47,4 +48,15 @@ Login
 			</div>
 		</div>
 	</form>
+	<div class="modal fade" id="modalEula" tabindex="-1" 
+	     role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-sm">
+		<div class="modal-content DialogWindow">
+		  <div id="EulaText"></div>
+		  <br/>
+		  <button onclick="EulaAcknowledged()">Accept</button>
+		  <button onclick="EulaDeclined()">Decline</button>
+		</div>
+	  </div>
+	</div>
 @EndSection

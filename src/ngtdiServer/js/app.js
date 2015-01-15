@@ -9,9 +9,30 @@ var siteTagCount;
 var siteUserCount;
 var siteHydrantCount;
 var Tags;
+var m_ItemToDelete;
 
 function menuselect(event, ui) {
     alert("Hello");
+}
+
+function save() {
+
+}
+
+function GetType() {
+    if ($('#radAllYear').prop('checked')) {
+        return "allyear";
+    } else if ($('#radBefore').prop('checked')) {
+        return "before";
+    } else if ($('#radAfter').prop('checked')) {
+        return "after";
+    } else if ($('#radBetween').prop('checked')) {
+        return "between";
+    } else if ($('#radOn').prop('checked')) {
+        return "on";
+    }
+
+    return "";
 }
 
 function register() {
@@ -49,32 +70,133 @@ function register() {
     }
 }
 
-function TypeChange(type) {
-
+function TypeChangeNoDefault(type) {
+    $('#lblStartDate').text('Start Date');
+    $('#dateStart').prop('disabled', false);
+    $('#dateEnd').prop('disabled', false);
+    
     if (type == 'allyear') {
-        
-    }
-    else if (type == 'before') {
-        
-    }
-    else if (type == 'after') {
-        
-    }
-    else if (type == 'between') {
-        
-    }
-    else if (type == 'on') {
-        
+        $('#rowStart').show();
+        $('#rowEnd').show();
+
+        $('#dateStart').prop('disabled', true);
+        $('#dateEnd').prop('disabled', true);
+    } else if (type == 'before') {
+        $('#rowStart').hide();
+        $('#rowEnd').show();
+    } else if (type == 'after') {
+        $('#rowStart').show();
+        $('#rowEnd').hide();
+    } else if (type == 'between') {
+        $('#rowStart').show();
+        $('#rowEnd').show();
+    } else if (type == 'on') {
+        $('#lblStartDate').text('On');
+        $('#rowStart').show();
+        $('#rowEnd').hide();
     }
 }
 
+function TypeChange(type) {
+    $('#lblStartDate').text('Start Date');
+    $('#dateStart').prop('disabled', false);
+    $('#dateEnd').prop('disabled', false);
+    
+    if (type == 'allyear') {
+        $('#rowStart').show();
+        $('#rowEnd').show();
 
+        var dStart;
+        var dEnd;
+        var dNow = new Date();
+        var iMonth = dNow.getMonth();
+        var iYear = dNow.getFullYear();
+        
+        if (iMonth >= 11) {
+            dStart = new Date(iYear + 1, 0, 1);
+            dEnd = new Date(iYear + 1, 11, 31);
+        } else {
+            dStart = new Date(iYear, 0, 1);
+            dEnd = new Date(iYear, 11, 31);
+        }
+
+        $('#dateStart').val(dStart.toLocaleDateString());
+        $('#dateStart').prop('disabled', true);
+
+        $('#dateEnd').val(dEnd.toLocaleDateString());
+        $('#dateEnd').prop('disabled', true);
+    } else if (type == 'before') {
+        $('#rowStart').hide();
+        $('#dateStart').val(null);
+
+        $('#rowEnd').show();
+        $('#dateEnd').val(null);
+    } else if (type == 'after') {
+        $('#rowStart').show();
+        $('#dateStart').val(null);
+
+        $('#rowEnd').hide();
+        $('#dateEnd').val(null);
+    } else if (type == 'between') {
+        $('#rowStart').show();
+        $('#dateStart').val(null);
+
+        $('#rowEnd').show();
+        $('#dateEnd').val(null);
+    } else if (type == 'on') {
+        $('#lblStartDate').text('On');
+
+        $('#rowStart').show();
+        $('#dateStart').val(null);
+
+        $('#rowEnd').hide();
+        $('#dateEnd').val(null);
+    }
+}
 
 function RegisterFailure() {
     $("#lblStatus").text("An error has occurred.");
     $("#lblStatus").addClass("bg-danger");
 }
 
+function ShowEula(response) {
+    $("#EulaText").text(response.EulaText);
+    $("#hidEulaGuid").val(response.EulaGuid);
+
+    $('#modalEula').modal({ show: true });
+}
+
+function EulaAcknowledged() {
+    var guid = $("#hidEulaGuid").val();
+    var username = localStorage.userName;
+    var authToken = localStorage.authToken;
+    
+    $.ajax({
+        type: "POST",
+        url: "/signeula/" + guid,
+        headers: { "Username": username, "AuthorizationToken": authToken },
+        success: SignEulaSuccess,
+        error: SignEulaFailure,
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+
+    $('#modalEula').modal({ show: false });
+}
+
+function SignEulaSuccess(response) {
+    window.location.replace("/home");
+}
+
+function SignEulaFailure(response) {
+
+}
+
+function EulaDeclined() {
+    $('#modalEula').modal('hide');
+    LogoutAndClear();
+}
 
 function login() {
     var username = $("#txtUsername").val();
@@ -95,7 +217,11 @@ function login() {
                 displayName = response.DisplayName;
                 WriteToLocalStorage();
 
-                window.location.replace("/home");
+                if (response.NeedsEula == "True") {
+                    ShowEula(response);
+                } else {
+                    window.location.replace("/home");
+                }
             }
             else if (response.Result == "NotActive") {
                 $("#lblStatus").text("User has been deactivated.");
@@ -157,10 +283,6 @@ function ChangePassword() {
     }
 }
 
-function GetMyAntiResolutions() {
-    
-}
-
 function ResetPassword() {
     var email = $("#txtEmailAddress").val();
 
@@ -186,35 +308,74 @@ function ResetFailure() {
     alert("An error occurred.");
 }
 
-function GetPendingTags() {
+function GetAntiResolutions() {
     var username = localStorage.userName;
     var authToken = localStorage.authToken;
 
     $.ajax({
         type: "GET",
-        url: "/rest/tags/pending/table",
+        url: "/getantiresolutions",
         headers: { "Username": username, "AuthorizationToken": authToken },
-        success: GetPendingTagsReceived,
-        error: GetPendingTagsFailure,
+        success: GetAntiResolutionsReceived,
+        error: GetAntiResolutionsFailure,
         cache: false,
         contentType: false,
         processData: false
     });
 }
 
-function GetPendingTagsFailure() {
+function GetAntiResolutionsFailure() {
     
 }
 
-function GetPendingTagsReceived(response) {
-    $('#tags_table').dataTable({
+function GetAntiResolutionsReceived(response) {
+    $('#ars_table').dataTable({
         data: response.Data,
-        columns: [{ "data": "ReviewButton", "width": "10%" },
-                  { "data": "TagDateTime", "width": "25%" },
-                  { "data": "Username", "width": "20%" },
-                  { "data": "Location", "width": "25%" },
-                  { "data": "Thumbnail", "width": "20%"}]
+        columns: [{ "data": "EditButton", "width": "10%" },
+                  { "data": "DeleteButton", "width": "10%" },
+                  { "data": "Period", "width": "10%" },
+                  { "data": "StartDate", "width": "15%" },
+                  { "data": "EndDate", "width": "15%" },
+                  { "data": "Text", "width": "40%"}]
     });
+}
+
+function DeleteAntiResolution(guid) {
+    m_ItemToDelete = guid;
+
+    $('#modalValidateDelete').modal({ show: true });
+}
+
+function DeleteAcknowledged() {
+    $('#modalValidateDelete').modal('hide');
+
+    var username = localStorage.userName;
+    var authToken = localStorage.authToken;
+    
+    $.ajax({
+        type: "GET",
+        url: "/deleteantiresolution/" + m_ItemToDelete,
+        headers: { "Username": username,
+            "AuthorizationToken": authToken},
+        success: DeleteAntiResolutionsReceived,
+        error: DeleteAntiResolutionsFailure,
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+}
+
+function DeleteAntiResolutionsReceived() {
+    window.location.replace("/home");
+}
+
+function DeleteAntiResolutionsFailure() {
+    
+}
+
+function DeleteCancelled() {
+    $('#modalValidateDelete').modal('hide');
+
 }
 
 function LoginFailure(jqxhr, status, error) {
@@ -246,9 +407,55 @@ function LogoutAndClear() {
     localStorage.removeItem("userName");
 }
 
-function SaveAntiResolutions() {
-    
-    var resolution = $("#txtAntiResolution").val();
-    
+function SaveAR() {
+    $("#AntiResolutionForm").submit();
+}
 
+function SaveAntiResolutions() {
+    var type = GetType();
+    var datStart = $("#dateStart").val();
+    var datEnd = $("#dateEnd").val();
+    var antiResolution = $("#txtAntiResolution").val();
+    var userName = localStorage.userName;
+    var authToken = localStorage.authToken;
+    var guid = $("#hidGuid").val();
+    
+    $('#btnSaveAR').button('disable');
+
+    try {
+        var formData = new FormData();
+        formData.append('Guid', guid);
+        formData.append('Type', type);
+        formData.append('Start', datStart);
+        formData.append('End', datEnd);
+        formData.append('AntiResolution', antiResolution);
+
+        $.ajax({
+            type: "POST",
+            url: "/addantiresolution",
+            headers: { "UserName": userName, "AuthorizationToken": authToken },
+            data: formData,
+            success: SaveReturn,
+            error: SaveError,
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    }
+    catch (err) {
+        alert(err);
+        $('#btnSaveAR').button('enable');
+    }
+}
+
+function SaveReturn() {
+    $('#modalSaved').modal({ show: true });
+}
+
+function SaveError() {
+
+}
+
+function SaveAcknowledged() {
+    window.location.replace("/home");
 }

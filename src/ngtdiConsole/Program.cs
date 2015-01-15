@@ -32,6 +32,9 @@ namespace NGTDI.Console
                     case "buildcannedemail":
                         BuildEmail();
                         break;
+                    case "buildeula":
+                        BuildEula();
+                        break;
                     default:
                         System.Console.WriteLine("No action requested");
                         break;
@@ -39,6 +42,19 @@ namespace NGTDI.Console
             }
 
             TraceFileHelper.TearDownLogging(); 
+        }
+
+        private static void BuildEula()
+        {
+            TGEula eula = new TGEula
+            {
+                Active = true, 
+                LastModifiedDateTime = DateTime.UtcNow, 
+                Text = "Blah, Blah, Blah"
+            };
+
+            NGTDIManager manager = new NGTDIManager();
+            manager.Persist(eula);
         }
 
         private static void BuildEmail()

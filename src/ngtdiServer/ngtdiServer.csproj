@@ -114,6 +114,10 @@
     <Compile Include="Bootstrapper\CustomBootstrapper.cs" />
     <Compile Include="Helpers\AuthHelper.cs" />
     <Compile Include="Helpers\UserMapper.cs" />
+    <Compile Include="JsonObjects\AntiResolution.cs" />
+    <Compile Include="JsonObjects\ARTableResponse.cs" />
+    <Compile Include="JsonObjects\LoginResult.cs" />
+    <Compile Include="JsonObjects\BasicResponse.cs" />
     <Compile Include="Modules\AppModule.cs" />
     <Compile Include="Modules\LoginModule.cs" />
     <Compile Include="Objects\NancyUser.cs" />
@@ -173,6 +177,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Views\addantiresolution.sshtml" />
+    <Content Include="Views\mastercustomtitle.sshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Views\editantiresolution.sshtml" />
     <None Include="Views\default.sshtml" />
     <None Include="Views\emailvalidationfailure.sshtml" />
     <None Include="Views\emailvalidationsuccess.sshtml" />

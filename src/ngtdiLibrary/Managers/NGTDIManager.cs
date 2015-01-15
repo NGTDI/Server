@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Text;
 using NGTDI.Library.DAOs;
 using NGTDI.Library.Objects;
 using TreeGecko.Library.AWS.Helpers;
 using TreeGecko.Library.Common.Helpers;
 using TreeGecko.Library.Common.Objects;
+using TreeGecko.Library.Common.Security;
 using TreeGecko.Library.Mongo.Managers;
 using TreeGecko.Library.Net.DAOs;
 using TreeGecko.Library.Net.Helpers;
@@ -25,30 +27,12 @@ namespace NGTDI.Library.Managers
             return dao.Get(_guid);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="_userGuid"></param>
-        /// <param name="_startDate"></param>
-        /// <param name="_endDate"></param>
-        /// <returns></returns>
-        public List<AntiResolution> GetAntiResolutions(Guid _userGuid,
-            DateTime _startDate, DateTime _endDate)
-        {
-            return null;
-        }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="_userGuid"></param>
+        /// <param name="_guid"></param>
         /// <returns></returns>
-        public List<AntiResolution> GetAntiResolutions(Guid _userGuid)
-        {
-            AntiResolutionDAO dao = new AntiResolutionDAO(MongoDB);
-            return dao.GetChildrenOf(_userGuid);
-        }
-
         public TGUserPassword GetTGUserPassword(Guid _guid)
         {
             TGUserPasswordDAO dao = new TGUserPasswordDAO(MongoDB);
@@ -83,10 +67,28 @@ namespace NGTDI.Library.Managers
             dao.Persist(_user);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_userGuid"></param>
+        /// <returns></returns>
         public TGUser GetUser(Guid _userGuid)
         {
             UserDAO dao = new UserDAO(MongoDB);
-            return dao.Get(_userGuid);
+            User user = dao.Get(_userGuid);
+
+            if (string.IsNullOrEmpty(user.Key))
+            {
+                string password = RandomString.GetRandomString(16);
+                byte[] temp = Encoding.ASCII.GetBytes(password);
+
+                user.Key = Convert.ToBase64String(temp);
+                user.Salt = TGUserPassword.GenerateSalt(user.Key, 16);
+
+                dao.Persist(user);
+            }
+
+            return user;
         }
 
         /// <summary>
@@ -107,7 +109,6 @@ namespace NGTDI.Library.Managers
         public List<User> GetUsers()
         {
             UserDAO dao = new UserDAO(MongoDB);
-
             return dao.GetAll();
         }
 
@@ -150,6 +151,12 @@ namespace NGTDI.Library.Managers
         {
             TGUserEmailValidationDAO dao = new TGUserEmailValidationDAO(MongoDB);
             dao.Delete(_userEmailValidation);
+        }
+
+        public void Delete(AntiResolution _antiResolution)
+        {
+            AntiResolutionDAO dao = new AntiResolutionDAO(MongoDB);
+            dao.Delete(_antiResolution);
         }
 
         public TGUserEmailValidation GetTGUserEmailValidation(string _emailToken)
@@ -204,9 +211,38 @@ namespace NGTDI.Library.Managers
 
         #endregion
 
+        #region AntiResolutions
+
+        public void Persist(AntiResolution _antiResolution)
+        {
+            AntiResolutionDAO dao = new AntiResolutionDAO(MongoDB);
+            dao.Persist(_antiResolution);
+        }
+
+        public List<AntiResolution> GetAntiResolutions(Guid _userGuid)
+        {
+            AntiResolutionDAO dao = new AntiResolutionDAO(MongoDB);
+            return dao.GetAntiResolutions(_userGuid);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_userGuid"></param>
+        /// <param name="_startDate"></param>
+        /// <param name="_endDate"></param>
+        /// <returns></returns>
+        public List<AntiResolution> GetAntiResolutions(Guid _userGuid,
+            DateTime _startDate, DateTime _endDate)
+        {
+            return null;
+        }
+
+        #endregion
+
         public bool SendCannedEmail(TGUser _tgUser,
-    string _cannedEmailName,
-    NameValueCollection _additionParameters)
+                                    string _cannedEmailName,
+                                    NameValueCollection _additionParameters)
         {
             try
             {
@@ -273,6 +309,40 @@ namespace NGTDI.Library.Managers
         }
 
         #endregion
+
+#region Eula
+
+        public TGEula GetEula(Guid _eulaGuid)
+        {
+            TGEulaDAO dao = new TGEulaDAO(MongoDB);
+            return dao.Get(_eulaGuid);
+        }
+
+        public void Persist(TGEula _eula)
+        {
+            TGEulaDAO dao = new TGEulaDAO(MongoDB);
+            dao.Persist(_eula);
+        }
+
+        public TGEula GetLatestEula()
+        {
+            TGEulaDAO dao = new TGEulaDAO(MongoDB);
+            return dao.GetLatest();
+        }
+
+        public TGEulaAgreement GetEulaAgreement(Guid _userGuid, Guid _eulaGuid)
+        {
+            TGEulaAgreementDAO dao = new TGEulaAgreementDAO(MongoDB);
+            return dao.Get(_userGuid, _eulaGuid);
+        }
+
+        public void Persist(TGEulaAgreement _eulaAgreement)
+        {
+            TGEulaAgreementDAO dao = new TGEulaAgreementDAO(MongoDB);
+            dao.Persist(_eulaAgreement);
+        }
+
+#endregion
 
     }
 }

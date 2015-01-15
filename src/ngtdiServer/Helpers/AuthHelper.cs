@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq;
-using System.Text;
 using Nancy;
+using Newtonsoft.Json;
 using NGTDI.Library.Managers;
 using NGTDI.Library.Objects;
+using Site.JsonObjects;
 using TreeGecko.Library.Net.Objects;
 
 namespace Site.Helpers
@@ -13,7 +14,7 @@ namespace Site.Helpers
         public static bool IsAuthorized(Request _request, out User _user)
         {
             NGTDIManager manager = new NGTDIManager();
-
+            
             string username = _request.Headers["Username"].First();
             string authToken = _request.Headers["AuthorizationToken"].First();
 
@@ -37,6 +38,7 @@ namespace Site.Helpers
 
         public static string Authorize(string _username, string _password, out User _user)
         {
+            LoginResult result = new LoginResult();
             NGTDIManager manager = new NGTDIManager();
             _user = manager.GetUser(_username);
 
@@ -52,43 +54,70 @@ namespace Site.Helpers
                                 TGUserAuthorization.GetNew(_user.Guid, "unknown");
                             manager.Persist(authorization);
 
-                            //Done with a string builder to avoid the json braces that confuse string.format
-                            StringBuilder sb = new StringBuilder();
-                            sb.Append("{ \"Result\":\"Success\", \"AuthorizationToken\":\"");
-                            sb.Append(authorization.AuthorizationToken);
-                            sb.Append("\", \"DisplayName\":\"");
-                            sb.Append(_user.DisplayName);
-                            sb.Append("\", \"UserName\":\"");
-                            sb.Append(_user.Username);
-                            sb.Append("\" }");
-
-                            return sb.ToString();
+                            result.Result = "Success";
+                            result.AuthorizationToken = authorization.AuthorizationToken;
+                            result.DisplayName = _user.DisplayName;
+                            result.UserName = _user.Username;
                         }
 
-                        //Bad password or username
-                        manager.LogWarning(Guid.Empty, "User not found");
-                        _user = null;
-                        return @"{ ""Result"":""BadUserOrPassword"" }";
+                        TGEula eula = manager.GetLatestEula();
+                        if (eula != null)
+                        {
+                            TGEulaAgreement agreement = manager.GetEulaAgreement(_user.Guid, eula.Guid);
+
+                            if (agreement == null)
+                            {
+                                result.NeedsEula = "True";
+                                result.EulaGuid = eula.Guid.ToString();
+                                result.EulaText = eula.Text;
+
+                                _user.EulaAccepted = false;
+                                manager.Persist(_user);
+                            }
+                            else
+                            {
+                                result.NeedsEula = "False";
+                            }
+                        }
+                        else
+                        {
+                            //Bad password or username
+                            manager.LogWarning(Guid.Empty, "User not found");
+                            _user = null;
+
+                            result.Result = "BadUserOrPassword";
+                        }
                     }
+                    else
+                    {
+                        //user not active
+                        //Todo - Log Something
+                        manager.LogWarning(_user.Guid, "User Not Active");
+                        _user = null;
 
-                    //user not active
-                    //Todo - Log Something
-                    manager.LogWarning(_user.Guid, "User Not Active");
-                    _user = null;
-                    return @"{ ""Result"":""NotActive"" }";
+                        result.Result = "NotActive";
+                    }
                 }
+                else
+                {
+                    //User not verified
+                    //Todo - Log Something
+                    manager.LogWarning(_user.Guid, "User not verified");
+                    _user = null;
 
-                //User not verified
-                //Todo - Log Something
-                manager.LogWarning(_user.Guid, "User not verified");
+                    result.Result = "NotVerified";
+                }
+            }
+            else
+            {
+                //User not found
+                manager.LogWarning(Guid.Empty, "User not found");
                 _user = null;
-                return @"{ ""Result"":""NotVerified"" }";
+
+                result.Result = "BadUserOrPassword";
             }
 
-            //User not found
-            manager.LogWarning(Guid.Empty, "User not found");
-            _user = null;
-            return @"{ ""Result"":""BadUserOrPassword"" }";
+            return JsonConvert.SerializeObject(result);
         }
 
         public static string Authorize(Request _request, out User _user)

@@ -24,8 +24,6 @@ Add Anti-Resolution
    $( document ).ready( function(){
 		$("#dateStart").datepicker();
 		$("#dateEnd").datepicker();
-		$("#radAllYear").attr('checked', true);
-		TypeChange('allyear');
 
 		$(".editor").jqte({
 			format:false,
@@ -35,38 +33,60 @@ Add Anti-Resolution
 			unlink:false,
 			remove:false
 		});
+
+		TypeChangeNoDefault("@Model.Period");
    } );
 
    </script>
 
    <form action="javascript:SaveAntiResolutions();" id="AntiResolutionForm">
-	   <input type="hidden" id="hidGuid" value="" />
+	   <input type="hidden" id="hidGuid" value="@Model.Guid" />
 	   <div class="row entry_row">
 			<div class="col-md-2 entry_label">Not going to do this</div>
 			<div class="col-md-3 entry_value">
 				<div class="row">
 					<div class="col-md-12">
-						<input type="radio" id="radAllYear" name="period" value="All Year" onchange="TypeChange('allyear');"/> All Year
+						<input type="radio" id="radAllYear" name="period" value="All Year" onchange="TypeChange('allyear');"
+						@If.Model.IsAllYear
+						   checked
+						@EndIf
+						/> All Year
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
-						<input type="radio" id="radBefore" name="period" value="Before" onchange="TypeChange('before');"/> Before
+						<input type="radio" id="radBefore" name="period" value="Before" onchange="TypeChange('before');"
+						@If.Model.IsBefore
+						   checked
+						@EndIf
+						/> Before
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
-						<input type="radio" id="radAfter" name="period" value="After" onchange="TypeChange('after');"/> After
+						<input type="radio" id="radAfter" name="period" value="After" onchange="TypeChange('after');
+						@If.Model.IsAfter
+						   checked
+						@EndIf
+						"/> After
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
-						<input type="radio" id="radBetween" name="period" value="Between" onchange="TypeChange('between');"/> Between
+						<input type="radio" id="radBetween" name="period" value="Between" onchange="TypeChange('between');"
+						@If.Model.IsPeriod
+						   checked
+						@EndIf
+						/> Between
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
-						<input type="radio" id="radOn" name="period" value="On" onchange=" TypeChange('on');"/> On
+						<input type="radio" id="radOn" name="period" value="On" onchange=" TypeChange('on');"
+						@If.Model.IsSpecificDate
+						   checked
+						@EndIf
+						/> On
 					</div>
 				</div>
 			</div>
@@ -79,18 +99,19 @@ Add Anti-Resolution
 	   <div class="row entry_row" id="rowStart">
 			<div class="col-md-2 entry_label" id="lblStartDate">Start Date</div>
 			<div class="col-md-10 entry_value">
-				<input type="text" id="dateStart"/>
+				<input type="text" id="dateStart" value="@Model.StartDate"/>
 			</div>
 		</div>
 		<div class="row entry_row" id="rowEnd">
 			<div class="col-md-2 entry_label">End Date</div>
 			<div class="col-md-10 entry_value">
-				<input type="text" id="dateEnd"/>
+				<input type="text" id="dateEnd" value="@Model.EndDate"/>
 			</div>
 		</div>
 	   <div class="row text_entry_row">
 			<div class="col-md-12"><h4>What aren't you going to do?</h4>
 				<div class="editor" id="txtAntiResolution" name="txtAntiResolution">
+				@Model.Text
 				</div>
 			</div>
 	   </div>

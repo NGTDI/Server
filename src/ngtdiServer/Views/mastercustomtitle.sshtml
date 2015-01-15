@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>@Section['PageTitle']</title>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+		<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+		<script src="/js/app.js"></script>
+		<link rel="stylesheet" href="/style/app.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css">
+		@Section['Head'];
+	</head>
+	<body role="document">
+		@AntiForgeryToken
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+		<div class="container" role="main">
+			<div class="row">
+				<div class="col-md-12">
+					<div>
+						<h1><a href="/home">NGTDI</a> <small>Not Going To Do It - The Anti-Resolution Site</small></h1>
+					</div>
+				</div>
+			</div>
+			<div class="row">		
+				<div class="col-md-3">
+					@Partial['menu.sshtml'];
+				</div>
+				<div class="col-md-9">
+					<div class="row">
+						@Section['TitleRow']
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							@Section['Content'];
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

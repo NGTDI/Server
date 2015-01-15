@@ -20,11 +20,15 @@ namespace Site.Helpers
 
             User user = (User)manager.GetUser(_identifier);
 
-            if (user != null)
+            if (user != null
+                && user.IsVerified)
             {
-                NancyUser nUser = new NancyUser {UserName = user.Username};
-                nUser.SetClaims(user.UserType);
-                return nUser;
+                if (user.EulaAccepted || _context.Request.Path.Contains("signeula"))
+                {
+                    NancyUser nUser = new NancyUser {UserName = user.Username};
+                    nUser.SetClaims(user.UserType);
+                    return nUser;
+                }
             }
 
             return null;

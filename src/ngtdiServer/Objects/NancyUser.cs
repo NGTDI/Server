@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Amazon.IdentityManagement.Model;
 using Nancy.Security;
 using TreeGecko.Library.Common.Enums;
 
