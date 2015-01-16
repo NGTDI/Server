@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="D:\publish\ngtdi" deleteExistingFiles="True" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FileSystem" replaceMatchingFiles="False" userName="" savePWD="False" userPWD="" SelectedForPublish="True">
+    <file relUrl="Views/changepassword.sshtml" publishTime="01/16/2015 04:13:19" />
+    <file relUrl="Views/register.sshtml" publishTime="12/03/2014 02:48:53" />
+    <file relUrl="bin/Nancy.Authentication.Forms.dll" publishTime="01/16/2015 03:58:00" />
+    <file relUrl="bin/Nancy.Hosting.Aspnet.xml" publishTime="01/16/2015 03:58:00" />
+    <file relUrl="bin/ngtdiLibrary.dll" publishTime="01/16/2015 05:15:33" />
+    <file relUrl="js/jquery-te-1.4.0.css" publishTime="12/03/2014 06:13:05" />
+    <file relUrl="bin/tgAWS.pdb" publishTime="01/16/2015 04:08:04" />
+    <file relUrl="bin/ngtdiServer.dll" publishTime="01/16/2015 05:15:33" />
+    <file relUrl="Views/suggestionthankyou.sshtml" publishTime="01/16/2015 05:00:39" />
+    <file relUrl="bin/Views/suggestionthankyou.sshtml" publishTime="01/16/2015 05:00:39" />
+    <file relUrl="bin/tgNet.pdb" publishTime="01/16/2015 04:08:04" />
+    <file relUrl="bin/MongoDB.Driver.dll" publishTime="08/27/2013 02:11:24" />
+    <file relUrl="bin/Nancy.dll" publishTime="01/16/2015 03:58:00" />
+    <file relUrl="bin/Views/register.sshtml" publishTime="12/03/2014 02:48:53" />
+    <file relUrl="bin/Nancy.Authentication.Forms.xml" publishTime="01/16/2015 03:58:00" />
+    <file relUrl="Style/app.css" publishTime="01/16/2015 04:49:50" />
+    <file relUrl="js/app.js" publishTime="01/16/2015 04:28:36" />
+    <file relUrl="bin/Views/master.sshtml" publishTime="12/03/2014 06:01:33" />
+    <file relUrl="Views/login.sshtml" publishTime="01/15/2015 05:20:08" />
+    <file relUrl="js/jquery-te-1.4.0.min.js" publishTime="12/03/2014 06:13:05" />
+    <file relUrl="bin/AWSSDK.xml" publishTime="10/23/2014 10:05:12" />
+    <file relUrl="bin/Nancy.Hosting.Aspnet.dll" publishTime="01/16/2015 03:58:00" />
+    <file relUrl="bin/ngtdiLibrary.pdb" publishTime="01/16/2015 05:15:33" />
+    <file relUrl="bin/tgAWS.dll" publishTime="01/16/2015 04:08:04" />
+    <file relUrl="bin/Nancy.xml" publishTime="01/16/2015 03:58:00" />
+    <file relUrl="bin/Views/login.sshtml" publishTime="01/15/2015 05:20:08" />
+    <file relUrl="packages.config" publishTime="12/03/2014 02:28:42" />
+    <file relUrl="Views/reset.sshtml" publishTime="12/03/2014 02:48:53" />
+    <file relUrl="Views/master.sshtml" publishTime="12/03/2014 06:01:33" />
+    <file relUrl="bin/Views/changepassword.sshtml" publishTime="01/16/2015 04:13:19" />
+    <file relUrl="bin/Views/loginmaster.sshtml" publishTime="12/03/2014 03:55:16" />
+    <file relUrl="bin/tgMongo.pdb" publishTime="01/16/2015 04:08:03" />
+    <file relUrl="Views/logout.sshtml" publishTime="12/03/2014 02:48:53" />
+    <file relUrl="Views/home.sshtml" publishTime="12/03/2014 03:32:49" />
+    <file relUrl="bin/Views/logout.sshtml" publishTime="12/03/2014 02:48:53" />
+    <file relUrl="bin/Views/suggestion.sshtml" publishTime="01/16/2015 04:56:16" />
+    <file relUrl="bin/Views/home.sshtml" publishTime="12/03/2014 03:32:49" />
+    <file relUrl="bin/ngtdiServer.pdb" publishTime="01/16/2015 05:15:33" />
+    <file relUrl="bin/Views/reset.sshtml" publishTime="12/03/2014 02:48:53" />
+    <file relUrl="Views/suggestion.sshtml" publishTime="01/16/2015 04:56:16" />
+    <file relUrl="bin/AWSSDK.dll" publishTime="10/23/2014 10:05:18" />
+    <file relUrl="bin/tgCommonLibrary.dll" publishTime="01/16/2015 04:07:59" />
+    <file relUrl="Views/loginmaster.sshtml" publishTime="12/03/2014 03:55:16" />
+    <file relUrl="Views/mastercustomtitle.sshtml" publishTime="12/22/2014 02:06:05" />
+    <file relUrl="Web.config" publishTime="12/03/2014 03:04:38" />
+    <file relUrl="bin/MongoDB.Bson.dll" publishTime="08/27/2013 02:11:23" />
+    <file relUrl="bin/tgNet.dll" publishTime="01/16/2015 04:08:04" />
+    <file relUrl="bin/tgCommonLibrary.pdb" publishTime="01/16/2015 04:07:59" />
+    <file relUrl="bin/Views/mastercustomtitle.sshtml" publishTime="12/22/2014 02:06:05" />
+    <file relUrl="bin/tgMongo.dll" publishTime="01/16/2015 04:08:03" />
+    <file relUrl="js/jquery-te.png" publishTime="12/03/2014 06:13:05" />
+    <file relUrl="bin/Newtonsoft.Json.dll" publishTime="07/15/2014 02:10:08" />
+  </publishProfile>
+</publishData>
