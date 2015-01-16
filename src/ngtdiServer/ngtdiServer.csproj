@@ -176,7 +176,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Views\addantiresolution.sshtml" />
+    <Content Include="Views\addantiresolution.sshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\mastercustomtitle.sshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -186,14 +188,25 @@
     <Content Include="Views\suggestionthankyou.sshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Views\editantiresolution.sshtml" />
-    <None Include="Views\default.sshtml" />
-    <None Include="Views\emailvalidationfailure.sshtml" />
-    <None Include="Views\emailvalidationsuccess.sshtml" />
-    <None Include="Views\menu.sshtml">
+    <Content Include="Views\editantiresolution.sshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\default.sshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\emailvalidationfailure.sshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\emailvalidationsuccess.sshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\menu.sshtml">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Views\myantiresolutions.sshtml" />
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\myantiresolutions.sshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
