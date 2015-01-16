@@ -180,6 +180,12 @@
     <Content Include="Views\mastercustomtitle.sshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Views\suggestion.sshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\suggestionthankyou.sshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Views\editantiresolution.sshtml" />
     <None Include="Views\default.sshtml" />
     <None Include="Views\emailvalidationfailure.sshtml" />

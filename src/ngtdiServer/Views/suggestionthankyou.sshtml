@@ -1,0 +1,16 @@
+﻿@Master['master.sshtml']
+
+@Section['Title']
+We Thank You for your suggestion and interest.
+@EndSection
+
+@Section['Head']
+@EndSection
+
+@Section['Content']
+	<div>
+		<p>Your suggestion has been added to our <strong>NotGoingToDoIt</strong> task list.</p>
+		<p>Should your suggestion really stun us, we might actually have to remove it from the NotGoingToDoIt list and actually have to schedule the work, do the work, test the work, and promote the work to prodution.  That just seems like a lot of work!  But hey, we got this far, so maybe.</p>
+		<p>But don't dispare, you can always Fork our <a href="https://github.com/NGTDI">GitHub project</a> and suggest an already coded change.  That would definitely up the chances of it getting done.</p>
+	</div>
+@EndSection

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Nancy;
+using Nancy.Responses;
 using Nancy.Security;
 using Newtonsoft.Json;
 using NGTDI.Library.Managers;
@@ -18,11 +19,6 @@ namespace Site.Modules
         public AppModule()
         {
             this.RequiresAuthentication();
-
-            Get["/"] = _parameters =>
-            {
-                return View["default.sshtml"];
-            };
 
             Get["/home"] = _parameters =>
             {
@@ -101,6 +97,37 @@ namespace Site.Modules
                 return response;
             };
 
+            Get["/suggestion"] = _parameters =>
+            {
+                return View["suggestion.sshtml"];
+            };
+
+            Post["/suggestion"] = _parameters =>
+            {
+                NGTDIManager manager = new NGTDIManager();
+                User user = manager.GetUser(Context.CurrentUser.UserName);
+
+                if (user != null)
+                {
+                    string suggestionText = Request.Form["txtSuggestion"];
+
+                    if (suggestionText != null)
+                    {
+                        Suggestion suggestion = new Suggestion
+                        {
+                            Active = true,
+                            SubmittedByUserGuid = user.Guid,
+                            Text = suggestionText,
+                            LastModifiedBy = user.Guid,
+                            LastModifiedDateTime = DateTime.UtcNow
+                        };
+
+                        manager.Persist(suggestion);
+                    }
+                }
+
+                return View["suggestionthankyou.sshtml"];
+            };
         }
 
         /// <summary>

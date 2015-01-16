@@ -1,0 +1,26 @@
+﻿@Master['master.sshtml']
+
+@Section['Title']
+Submit Suggestion
+@EndSection
+
+@Section['Head']
+@EndSection
+
+@Section['Content']
+	<form id="suggestionform" action="/suggestion" method="post">
+		<div class="row">
+			<div class="col-md-4">
+				<label for="txtSuggestion">Your Suggestion</label>
+			</div>
+			<div class="col-md-8">
+				<textarea id="txtSuggestion" name="txtSuggestion"></textarea>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">	
+				<input type="submit" id="btnSubmitSuggestion" class="btn btn-primary" value="Submit Suggestion"/>
+			</div>
+		</div>
+	</form>
+@EndSection

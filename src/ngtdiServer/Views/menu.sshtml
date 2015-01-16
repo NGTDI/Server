@@ -18,6 +18,9 @@
       <a href="/changepassword">Change Password</a>
     </li>
     <li>
+      <a href="/suggestion">Submit Suggestion</a>
+    </li>
+    <li>
       <a href="/logout">Logout</a>
     </li>
   </ul>

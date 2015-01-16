@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Nancy;
 using Nancy.Authentication.Forms;
+using Nancy.Responses;
 using NGTDI.Library.Constants;
 using NGTDI.Library.Managers;
 using NGTDI.Library.Objects;
@@ -19,6 +20,11 @@ namespace Site.Modules
     {
         public LoginModule()
         {
+            Get["/"] = _parameters =>
+            {
+                return Response.AsRedirect("/home", RedirectResponse.RedirectType.Permanent);
+            };
+
             Get["/login"] = _parameters =>
             {
                 return View["login.sshtml"];

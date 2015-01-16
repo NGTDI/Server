@@ -344,5 +344,15 @@ namespace NGTDI.Library.Managers
 
 #endregion
 
+        #region Suggestion
+
+        public void Persist(Suggestion _suggestion)
+        {
+            SuggestionDAO dao = new SuggestionDAO(MongoDB);
+            dao.Persist(_suggestion);
+        }
+
+        #endregion
+
     }
 }

@@ -82,11 +82,13 @@
     <Compile Include="Constants\NGTDIPeriod.cs" />
     <Compile Include="DAOs\AntiResolutionDAO.cs" />
     <Compile Include="Constants\CannedEmailNames.cs" />
+    <Compile Include="DAOs\SuggestionDAO.cs" />
     <Compile Include="DAOs\SystemEmailDAO.cs" />
     <Compile Include="DAOs\UserDAO.cs" />
     <Compile Include="Managers\NGTDIManager.cs" />
     <Compile Include="Managers\NGTDIStructureManager.cs" />
     <Compile Include="Objects\AntiResolution.cs" />
+    <Compile Include="Objects\Suggestion.cs" />
     <Compile Include="Objects\SystemEmail.cs" />
     <Compile Include="Objects\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
