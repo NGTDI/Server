@@ -13,6 +13,7 @@ namespace NGTDI.Library.Objects
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public string Text { get; set; }
+        public bool IsPublic { get; set; } 
 
         public override TGSerializedObject GetTGSerializedObject()
         {
@@ -22,6 +23,7 @@ namespace NGTDI.Library.Objects
             tgs.Add("StartDate", StartDate);
             tgs.Add("EndDate", EndDate);
             tgs.Add("Text", Text);
+            tgs.Add("IsPublic", IsPublic);
 
             return tgs;
         }
@@ -34,6 +36,7 @@ namespace NGTDI.Library.Objects
             StartDate = _tgs.GetNullableDateTime("StartDate");
             EndDate = _tgs.GetNullableDateTime("EndDate");
             Text = _tgs.GetString("Text");
+            IsPublic = _tgs.GetBoolean("IsPublic");
         }
 
         /// <summary>

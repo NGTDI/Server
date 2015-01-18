@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Nancy;
-using Nancy.Responses;
 using Nancy.Security;
 using Newtonsoft.Json;
 using NGTDI.Library.Managers;
@@ -248,7 +247,6 @@ namespace Site.Modules
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="_user"></param>
         /// <param name="_parameters"></param>
         /// <returns></returns>
         private string HandleAddAntiResolution(DynamicDictionary _parameters)
@@ -266,6 +264,7 @@ namespace Site.Modules
                     string sStart = Request.Form["Start"];
                     string sEnd = Request.Form["End"];
                     string sAntiResolution = Request.Form["AntiResolution"];
+                    string sIsPublic = Request.Form["IsPublic"];
 
                     DateTime? startDate = null;
                     if (!string.IsNullOrEmpty(sStart))
@@ -277,6 +276,13 @@ namespace Site.Modules
                     if (!string.IsNullOrEmpty(sEnd))
                     {
                         endDate = DateTime.Parse(sEnd);
+                    }
+
+                    bool isPublic = false;
+                    if (sIsPublic != null
+                        && sIsPublic.Equals("True", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        isPublic = true;
                     }
 
                     AntiResolution ar = null;
@@ -301,6 +307,7 @@ namespace Site.Modules
                     ar.StartDate = startDate;
                     ar.SetAntiResolutionText(user, sAntiResolution);
                     ar.ParentGuid = user.Guid;
+                    ar.IsPublic = isPublic;
 
                     manager.Persist(ar);
                 }

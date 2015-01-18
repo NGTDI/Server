@@ -88,8 +88,12 @@ Add Anti-Resolution
 				<input type="text" id="dateEnd"/>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-8"><h4>What aren't you going to do?</h4></div>
+			<div class="col-md-4"><input type="checkbox" id="chkPublic" name="chkPublic" value="Public"><h4>Make Public</h4></div>
+	   </div>
 	   <div class="row text_entry_row">
-			<div class="col-md-12"><h4>What aren't you going to do?</h4>
+			<div class="col-md-12">
 				<div class="editor" id="txtAntiResolution" name="txtAntiResolution">
 				</div>
 			</div>

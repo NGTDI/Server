@@ -30,7 +30,6 @@ namespace Site.JsonObjects
 
                 Data.Add(antiResolution);
             }
-
         }
 
         public string Result { get; set; }

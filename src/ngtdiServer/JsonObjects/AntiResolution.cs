@@ -14,6 +14,7 @@ namespace Site.JsonObjects
         public string Text { get; set; }
         public string EditButton { get; set; }
         public string DeleteButton { get; set; }
+        public string Public { get; set; }
 
         /// <summary>
         /// 
@@ -51,6 +52,15 @@ namespace Site.JsonObjects
                 if (_user != null)
                 {
                     Text = _antiResolution.GetAntiResolutionText(_user);
+                }
+
+                if (_antiResolution.IsPublic)
+                {
+                    Public = "checked";
+                }
+                else
+                {
+                    Public = "";
                 }
 
                 EditButton = string.Format("<a class=\"btn btn-info\" href=\"/editantiresolution/{0}\">Edit</a>",

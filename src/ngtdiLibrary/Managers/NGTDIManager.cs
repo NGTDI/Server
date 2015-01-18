@@ -238,6 +238,12 @@ namespace NGTDI.Library.Managers
             return null;
         }
 
+        public List<AntiResolution> GetPublicAntiResolutions(int _limit)
+        {
+            AntiResolutionDAO dao = new AntiResolutionDAO(MongoDB);
+            return dao.GetPublicAntiResolutions(_limit);
+        }
+
         #endregion
 
         public bool SendCannedEmail(TGUser _tgUser,

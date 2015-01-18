@@ -107,6 +107,7 @@
     <Content Include="js\jquery-te-1.4.0.css" />
     <Content Include="js\jquery-te-1.4.0.min.js" />
     <Content Include="js\jquery-te.png" />
+    <Content Include="js\public.js" />
     <Content Include="Style\app.css" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -118,8 +119,11 @@
     <Compile Include="JsonObjects\ARTableResponse.cs" />
     <Compile Include="JsonObjects\LoginResult.cs" />
     <Compile Include="JsonObjects\BasicResponse.cs" />
+    <Compile Include="JsonObjects\PublicAntiResolution.cs" />
+    <Compile Include="JsonObjects\PublicARTableResponse.cs" />
     <Compile Include="Modules\AppModule.cs" />
     <Compile Include="Modules\LoginModule.cs" />
+    <Compile Include="Modules\PublicModule.cs" />
     <Compile Include="Objects\NancyUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -148,7 +152,11 @@
       <Name>ngtdiLibrary</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\recentfeed.sshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Views\changepassword.sshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -207,6 +215,10 @@
     <Content Include="Views\myantiresolutions.sshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\masterpublic.sshtml" />
+    <None Include="Views\publicantiresolution.sshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

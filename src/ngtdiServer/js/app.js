@@ -419,6 +419,10 @@ function SaveAntiResolutions() {
     var userName = localStorage.userName;
     var authToken = localStorage.authToken;
     var guid = $("#hidGuid").val();
+    var isPublic = "False";
+    if ($("#chkMakePublic").prop("checked", true)) {
+        isPublic = "True";
+    }
     
     $('#btnSaveAR').button('disable');
 
@@ -429,6 +433,7 @@ function SaveAntiResolutions() {
         formData.append('Start', datStart);
         formData.append('End', datEnd);
         formData.append('AntiResolution', antiResolution);
+        formData.append('IsPublic', isPublic);
 
         $.ajax({
             type: "POST",

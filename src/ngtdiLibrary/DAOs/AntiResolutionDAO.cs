@@ -11,19 +11,43 @@ namespace NGTDI.Library.DAOs
     {
         public AntiResolutionDAO(MongoDatabase _mongoDB) : base(_mongoDB)
         {
-            //
+            //User
             HasParent = true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public override string TableName
         {
             get { return "AntiResolutions"; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_userGuid"></param>
+        /// <returns></returns>
         public List<AntiResolution> GetAntiResolutions(Guid _userGuid)
         {
             IMongoQuery query = GetQuery("ParentGuid", _userGuid.ToString());
             return GetList(GetCursor(query).SetSortOrder(SortBy.Ascending("StartDate")));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_limit"></param>
+        /// <returns></returns>
+        public List<AntiResolution> GetPublicAntiResolutions(int _limit)
+        {
+            IMongoQuery query = GetQuery("IsPublic", "True");
+
+            MongoCursor cursor = GetCursor(query)
+                .SetSortOrder(SortBy.Ascending("LastModifiedDateTime"))
+                .SetLimit(_limit);
+
+            return GetList(cursor);
         }
     }
 }
