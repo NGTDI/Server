@@ -8,6 +8,7 @@ using NGTDI.Library.Managers;
 using NGTDI.Library.Objects;
 using Site.Helpers;
 using Site.JsonObjects;
+using TreeGecko.Library.Common.Helpers;
 using TreeGecko.Library.Net.Objects;
 using AntiResolution = NGTDI.Library.Objects.AntiResolution;
 
@@ -67,7 +68,11 @@ namespace Site.Modules
 
             Get["/myantiresolutions"] = _parameters =>
             {
-                return View["myantiresolutions.sshtml"];
+                MyAntiResolutionsModel model = new MyAntiResolutionsModel
+                {
+                    FBAppID = Config.GetSettingValue("FBAppId")
+                };
+                return View["myantiresolutions.sshtml", model];
             };
 
             Get["/changepassword"] = _parameters =>
@@ -276,6 +281,11 @@ namespace Site.Modules
                     if (!string.IsNullOrEmpty(sEnd))
                     {
                         endDate = DateTime.Parse(sEnd);
+                    }
+
+                    if (sAntiResolution != null)
+                    {
+                        sAntiResolution = sAntiResolution.Replace("\t", "");
                     }
 
                     bool isPublic = false;

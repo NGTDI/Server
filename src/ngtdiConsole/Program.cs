@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Text;
 using NGTDI.Library.Managers;
+using NGTDI.Library.Objects;
 using TreeGecko.Library.Common.Enums;
 using TreeGecko.Library.Common.Helpers;
+using TreeGecko.Library.Common.Security;
 using TreeGecko.Library.Net.Enums;
 using TreeGecko.Library.Net.Objects;
 
@@ -35,6 +38,9 @@ namespace NGTDI.Console
                     case "buildeula":
                         BuildEula();
                         break;
+                    case "test":
+                        Test();
+                        break;
                     default:
                         System.Console.WriteLine("No action requested");
                         break;
@@ -42,6 +48,20 @@ namespace NGTDI.Console
             }
 
             TraceFileHelper.TearDownLogging(); 
+        }
+
+        public static void Test()
+        {
+            string password = RandomString.GetRandomString(16);
+            byte[] temp = Encoding.ASCII.GetBytes(password);
+
+            User user = new User();
+            user.Key = Convert.ToBase64String(temp);
+            user.Salt = TGUserPassword.GenerateSalt(user.Key, 16);
+
+            AntiResolution ar = new AntiResolution();
+            ar.SetAntiResolutionText(user, "This is a test");
+            string test = ar.GetAntiResolutionText(user);
         }
 
         private static void BuildEula()

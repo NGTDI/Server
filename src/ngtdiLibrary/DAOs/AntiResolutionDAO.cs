@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using NGTDI.Library.Objects;
@@ -41,7 +42,9 @@ namespace NGTDI.Library.DAOs
         /// <returns></returns>
         public List<AntiResolution> GetPublicAntiResolutions(int _limit)
         {
-            IMongoQuery query = GetQuery("IsPublic", "True");
+            NameValueCollection nvc = new NameValueCollection {{"IsPublic", "True"}, {"IsFlagged", "False"}};
+
+            IMongoQuery query = GetQuery(nvc);
 
             MongoCursor cursor = GetCursor(query)
                 .SetSortOrder(SortBy.Ascending("LastModifiedDateTime"))

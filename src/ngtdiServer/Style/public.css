@@ -1,0 +1,14 @@
+﻿body {
+}
+
+.rowtext_outer {
+    position: relative;
+}
+
+.rowtext_inner {
+    position: absolute;
+    text-align: left;
+    min-height: 39px;
+    line-height: normal;
+    top: 50%;
+}

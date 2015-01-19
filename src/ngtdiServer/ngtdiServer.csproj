@@ -109,16 +109,21 @@
     <Content Include="js\jquery-te.png" />
     <Content Include="js\public.js" />
     <Content Include="Style\app.css" />
+    <Content Include="Style\public.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper\CustomBootstrapper.cs" />
+    <Compile Include="Helpers\ArticleHelper.cs" />
     <Compile Include="Helpers\AuthHelper.cs" />
     <Compile Include="Helpers\UserMapper.cs" />
     <Compile Include="JsonObjects\AntiResolution.cs" />
     <Compile Include="JsonObjects\ARTableResponse.cs" />
     <Compile Include="JsonObjects\LoginResult.cs" />
     <Compile Include="JsonObjects\BasicResponse.cs" />
+    <Compile Include="JsonObjects\MyAntiResolutionsModel.cs" />
     <Compile Include="JsonObjects\PublicAntiResolution.cs" />
     <Compile Include="JsonObjects\PublicARTableResponse.cs" />
     <Compile Include="Modules\AppModule.cs" />

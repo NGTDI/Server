@@ -1,10 +1,17 @@
 ﻿@Master['masterpublic.sshtml']
 
 @Section['Title']
-Recent Public Anti-Resolutions
+Not Going To Do It
 @EndSection
 
 @Section['Head']
+<meta property="fb:app_id" content="@Model.FBAppID" />
+<meta property="og:title" content="I am Not Going To Do It" />
+<meta property="og:Description" content="@Model.Text" />
+<meta property="og:site_name" content="NotGoingToDoIt" />
+<meta property="og:url" content="@Model.Url" />
+<meta property="og:type" content="article" />
+
 <style>
 
 .antiresolution {
@@ -33,11 +40,11 @@ Recent Public Anti-Resolutions
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-4"><h4>Time Period</h4></div>
+			<div class="col-md-4"><strong>Time Period</strong></div>
 			<div class="col-md-8">@Model.Period</div>
 		</div>
 		<div class="row">
-			<div class="col-md-4"><h4>Not Going To Do</h4></div>
+			<div class="col-md-4"><strong>Not Going To Do</strong></div>
 			<div class="col-md-8">@Model.Text</div>
 		</div>
 	</div>

@@ -333,9 +333,10 @@ function GetAntiResolutionsReceived(response) {
         data: response.Data,
         columns: [{ "data": "EditButton", "width": "10%" },
                   { "data": "DeleteButton", "width": "10%" },
+                  { "data": "ShareButton", "width": "10%" },
                   { "data": "Period", "width": "10%" },
-                  { "data": "StartDate", "width": "15%" },
-                  { "data": "EndDate", "width": "15%" },
+                  { "data": "StartDate", "width": "10%" },
+                  { "data": "EndDate", "width": "10%" },
                   { "data": "Text", "width": "40%"}]
     });
 }
@@ -419,10 +420,13 @@ function SaveAntiResolutions() {
     var userName = localStorage.userName;
     var authToken = localStorage.authToken;
     var guid = $("#hidGuid").val();
-    var isPublic = "False";
-    if ($("#chkMakePublic").prop("checked", true)) {
+    var isPublic;
+    if ($('#chkPublic').attr('checked', true)) {
         isPublic = "True";
+    } else {
+        isPublic = "False";
     }
+    
     
     $('#btnSaveAR').button('disable');
 

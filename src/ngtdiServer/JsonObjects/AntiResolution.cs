@@ -1,7 +1,10 @@
 ﻿using System;
+using System.EnterpriseServices;
 using Newtonsoft.Json;
 using NGTDI.Library.Constants;
 using NGTDI.Library.Objects;
+using Site.Helpers;
+using TreeGecko.Library.Common.Helpers;
 
 namespace Site.JsonObjects
 {
@@ -14,6 +17,7 @@ namespace Site.JsonObjects
         public string Text { get; set; }
         public string EditButton { get; set; }
         public string DeleteButton { get; set; }
+        public string ShareButton { get; set; }
         public string Public { get; set; }
 
         /// <summary>
@@ -70,6 +74,17 @@ namespace Site.JsonObjects
                     string.Format(
                         "<button class=\"btn btn-info\"onclick=\"DeleteAntiResolution('{0}');\">Delete</button>",
                         _antiResolution.Guid);
+
+                if (_antiResolution.IsPublic)
+                {
+                    const string SHARE_BUTTON = "<div class=\"fb-share-button\" data-href=\"{0}\" data-layout=\"button\"></div>";
+                    string url = ArticleHelper.GetUrl(_antiResolution.Guid);
+                    ShareButton = string.Format(SHARE_BUTTON, url);
+                }
+                else
+                {
+                    ShareButton = "&nbsp;";
+                }
             }
 
         }

@@ -14,6 +14,7 @@ namespace NGTDI.Library.Objects
         public DateTime? EndDate { get; set; }
         public string Text { get; set; }
         public bool IsPublic { get; set; } 
+        public bool IsFlagged { get; set; }
 
         public override TGSerializedObject GetTGSerializedObject()
         {
@@ -24,6 +25,7 @@ namespace NGTDI.Library.Objects
             tgs.Add("EndDate", EndDate);
             tgs.Add("Text", Text);
             tgs.Add("IsPublic", IsPublic);
+            tgs.Add("IsFlagged", IsFlagged);
 
             return tgs;
         }
@@ -37,6 +39,7 @@ namespace NGTDI.Library.Objects
             EndDate = _tgs.GetNullableDateTime("EndDate");
             Text = _tgs.GetString("Text");
             IsPublic = _tgs.GetBoolean("IsPublic");
+            IsFlagged = _tgs.GetBoolean("IsFlagged");
         }
 
         /// <summary>
@@ -60,7 +63,9 @@ namespace NGTDI.Library.Objects
         {
             CryptoString cs = new CryptoString(_user.Key, _user.Salt);
 
-            return cs.Decrypt(Text);
+            string temp = cs.Decrypt(Text);
+
+            return temp.Replace("\0", "");
         }
     }
 }
