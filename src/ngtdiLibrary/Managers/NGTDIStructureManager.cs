@@ -1,42 +1,27 @@
 ﻿using NGTDI.Library.DAOs;
-using TreeGecko.Library.Mongo.Managers;
-using TreeGecko.Library.Net.DAOs;
+using TreeGecko.Library.Net.Managers;
 
 namespace NGTDI.Library.Managers
 {
-    public class NGTDIStructureManager : AbstractMongoManager
+    public class NGTDIStructureManager : AbstractCoreStructureManager
     {
         public NGTDIStructureManager()
             : base("NGTDI")
         {
         }
 
-        public void BuildDB()
+        public override void BuildDB()
         {
+            BuildDB(false);
+
             AntiResolutionDAO antiResolutionDAO = new AntiResolutionDAO(MongoDB);
             antiResolutionDAO.BuildTable();
 
-            SystemEmailDAO systemEmailDAO = new SystemEmailDAO(MongoDB);
-            systemEmailDAO.BuildTable();
+            SuggestionDAO suggestionDAO = new SuggestionDAO(MongoDB);
+            suggestionDAO.BuildTable();
 
             UserDAO userDAO = new UserDAO(MongoDB);
             userDAO.BuildTable();
-
-            CannedEmailDAO cannedEmailDAO = new CannedEmailDAO(MongoDB);
-            cannedEmailDAO.BuildTable();
-
-            TGUserAuthorizationDAO tgUserAuthorizationDAO = new TGUserAuthorizationDAO(MongoDB);
-            tgUserAuthorizationDAO.BuildTable();
-
-            TGUserEmailValidationDAO tgUserEmailValidationDAO = new TGUserEmailValidationDAO(MongoDB);
-            tgUserEmailValidationDAO.BuildTable();
-
-            TGUserPasswordDAO tgUserPasswordDAO = new TGUserPasswordDAO(MongoDB);
-            tgUserPasswordDAO.BuildTable();
-
-            WebLogEntryDAO webLogEntryDAO = new WebLogEntryDAO(MongoDB);
-            webLogEntryDAO.BuildTable();
-
         }
     }
 }

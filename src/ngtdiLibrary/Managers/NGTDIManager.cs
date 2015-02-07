@@ -8,52 +8,16 @@ using TreeGecko.Library.AWS.Helpers;
 using TreeGecko.Library.Common.Helpers;
 using TreeGecko.Library.Common.Objects;
 using TreeGecko.Library.Common.Security;
-using TreeGecko.Library.Mongo.Managers;
-using TreeGecko.Library.Net.DAOs;
 using TreeGecko.Library.Net.Helpers;
+using TreeGecko.Library.Net.Managers;
 using TreeGecko.Library.Net.Objects;
 
 namespace NGTDI.Library.Managers
 {
-    public class NGTDIManager : AbstractMongoManager
+    public class NGTDIManager : AbstractCoreManager
     {
         public NGTDIManager() : base("NGTDI")
         {
-        }
-
-        public AntiResolution GetAntiResolution(Guid _guid)
-        {
-            AntiResolutionDAO dao = new AntiResolutionDAO(MongoDB);
-            return dao.Get(_guid);
-        }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="_guid"></param>
-        /// <returns></returns>
-        public TGUserPassword GetTGUserPassword(Guid _guid)
-        {
-            TGUserPasswordDAO dao = new TGUserPasswordDAO(MongoDB);
-            return dao.Get(_guid);
-        }
-
-        public bool ValidateUser(TGUser _user, string _testPassword)
-        {
-            TGUserPassword userPassword = GetTGUserPassword(_user.Guid);
-
-            if (userPassword != null)
-            {
-                string testHash = TGUserPassword.HashPassword(userPassword.Salt, _testPassword);
-
-                if (testHash.Equals(userPassword.HashedPassword))
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         #region Users
@@ -134,23 +98,12 @@ namespace NGTDI.Library.Managers
 
         #endregion
 
+        #region AntiResolutions
 
-        public TGUserPassword GetUserPasswordByUser(Guid _userGuid)
+        public AntiResolution GetAntiResolution(Guid _guid)
         {
-            TGUserPasswordDAO dao = new TGUserPasswordDAO(MongoDB);
-            return dao.GetOneItem<TGUserPassword>("UserGuid", _userGuid.ToString());
-        }
-
-        public void Persist(TGUserPassword _userPassword)
-        {
-            TGUserPasswordDAO dao = new TGUserPasswordDAO(MongoDB);
-            dao.Persist(_userPassword);
-        }
-
-        public void Delete(TGUserEmailValidation _userEmailValidation)
-        {
-            TGUserEmailValidationDAO dao = new TGUserEmailValidationDAO(MongoDB);
-            dao.Delete(_userEmailValidation);
+            AntiResolutionDAO dao = new AntiResolutionDAO(MongoDB);
+            return dao.Get(_guid);
         }
 
         public void Delete(AntiResolution _antiResolution)
@@ -158,60 +111,6 @@ namespace NGTDI.Library.Managers
             AntiResolutionDAO dao = new AntiResolutionDAO(MongoDB);
             dao.Delete(_antiResolution);
         }
-
-        public TGUserEmailValidation GetTGUserEmailValidation(string _emailToken)
-        {
-            TGUserEmailValidationDAO dao = new TGUserEmailValidationDAO(MongoDB);
-            return dao.Get(_emailToken);
-        }
-
-        public void Persist(TGUserEmailValidation _emailValidation)
-        {
-            TGUserEmailValidationDAO dao = new TGUserEmailValidationDAO(MongoDB);
-            dao.Persist(_emailValidation);
-        }
-
-        #region UserAuthorizations
-
-        public TGUserAuthorization GetUserAuthorization(Guid _userGuid, string _authorizationToken)
-        {
-            TGUserAuthorizationDAO dao = new TGUserAuthorizationDAO(MongoDB);
-            return dao.Get(_userGuid, _authorizationToken);
-        }
-
-        public void Persist(TGUserAuthorization _tgUserAuthorization)
-        {
-            TGUserAuthorizationDAO dao = new TGUserAuthorizationDAO(MongoDB);
-            dao.Persist(_tgUserAuthorization);
-        }
-
-        #endregion
-
-        #region Logging
-        public void LogWarning(Guid _userGuid, string _message)
-        {
-            WebLogEntryDAO dao = new WebLogEntryDAO(MongoDB);
-
-        }
-
-        public void LogException(Guid _userGuid, Exception _message)
-        {
-
-        }
-
-        public void LogInfo(Guid _userGuid, string _message)
-        {
-
-        }
-
-        public void LogVerbose(Guid _userGuid, string _message)
-        {
-
-        }
-
-        #endregion
-
-        #region AntiResolutions
 
         public void Persist(AntiResolution _antiResolution)
         {
@@ -283,72 +182,6 @@ namespace NGTDI.Library.Managers
             return false;
         }
 
-        #region Email
-        public void Persist(CannedEmail _cannedEmail)
-        {
-            CannedEmailDAO dao = new CannedEmailDAO(MongoDB);
-            dao.Persist(_cannedEmail);
-        }
-
-        public CannedEmail GetCannedEmail(Guid _cannedEmailGuid)
-        {
-            CannedEmailDAO dao = new CannedEmailDAO(MongoDB);
-            return dao.Get(_cannedEmailGuid);
-        }
-
-        public CannedEmail GetCannedEmail(string _cannedEmailName)
-        {
-            CannedEmailDAO dao = new CannedEmailDAO(MongoDB);
-            return dao.Get(_cannedEmailName);
-        }
-
-        public void Persist(SystemEmail _systemEmail)
-        {
-            SystemEmailDAO dao = new SystemEmailDAO(MongoDB);
-            dao.Persist(_systemEmail);
-        }
-
-        public SystemEmail GetSystemEmail(Guid _guid)
-        {
-            SystemEmailDAO dao = new SystemEmailDAO(MongoDB);
-            return dao.Get(_guid);
-        }
-
-        #endregion
-
-#region Eula
-
-        public TGEula GetEula(Guid _eulaGuid)
-        {
-            TGEulaDAO dao = new TGEulaDAO(MongoDB);
-            return dao.Get(_eulaGuid);
-        }
-
-        public void Persist(TGEula _eula)
-        {
-            TGEulaDAO dao = new TGEulaDAO(MongoDB);
-            dao.Persist(_eula);
-        }
-
-        public TGEula GetLatestEula()
-        {
-            TGEulaDAO dao = new TGEulaDAO(MongoDB);
-            return dao.GetLatest();
-        }
-
-        public TGEulaAgreement GetEulaAgreement(Guid _userGuid, Guid _eulaGuid)
-        {
-            TGEulaAgreementDAO dao = new TGEulaAgreementDAO(MongoDB);
-            return dao.Get(_userGuid, _eulaGuid);
-        }
-
-        public void Persist(TGEulaAgreement _eulaAgreement)
-        {
-            TGEulaAgreementDAO dao = new TGEulaAgreementDAO(MongoDB);
-            dao.Persist(_eulaAgreement);
-        }
-
-#endregion
 
         #region Suggestion
 
