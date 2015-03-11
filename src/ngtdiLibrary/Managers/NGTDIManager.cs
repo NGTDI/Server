@@ -93,7 +93,8 @@ namespace NGTDI.Library.Managers
         /// <returns></returns>
         public long GetUserCount()
         {
-            return 0;
+            UserDAO dao = new UserDAO(MongoDB);
+            return dao.GetCount();
         }
 
         #endregion

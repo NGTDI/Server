@@ -9,6 +9,7 @@ using NGTDI.Library.Constants;
 using NGTDI.Library.Managers;
 using NGTDI.Library.Objects;
 using Site.Helpers;
+using Site.Objects;
 using TreeGecko.Library.Common.Enums;
 using TreeGecko.Library.Common.Helpers;
 using TreeGecko.Library.Common.Security;
@@ -27,7 +28,14 @@ namespace Site.Modules
 
             Get["/login"] = _parameters =>
             {
-                return View["login.sshtml"];
+                NGTDIManager manager = new NGTDIManager();
+
+                LoginPage loginPage = new LoginPage
+                {
+                    Users = manager.GetUserCount()
+                };
+
+                return View["login.sshtml", loginPage];
             };
 
             Post["/login"] = _parameters =>

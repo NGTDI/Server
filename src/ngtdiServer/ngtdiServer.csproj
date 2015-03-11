@@ -131,6 +131,7 @@
     <Compile Include="Modules\AppModule.cs" />
     <Compile Include="Modules\LoginModule.cs" />
     <Compile Include="Modules\PublicModule.cs" />
+    <Compile Include="Objects\LoginPage.cs" />
     <Compile Include="Objects\NancyUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

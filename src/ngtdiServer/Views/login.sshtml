@@ -8,6 +8,16 @@ Login
 @EndSection
 
 @Section['Content']
+	<div class="row">
+		<div class="col-md-12"> 
+			<label>NotGoingToDoIt has @Model.Users users.</label>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12"> 
+			&nbsp;
+		</div>
+	</div>
 	<form id="loginform" action="javascript:login();">
 		<input type="hidden" id="hidEulaGuid">
 		<div class="row">

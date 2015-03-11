@@ -331,14 +331,23 @@ function GetAntiResolutionsFailure() {
 function GetAntiResolutionsReceived(response) {
     $('#ars_table').dataTable({
         data: response.Data,
-        columns: [{ "data": "EditButton", "width": "10%" },
-                  { "data": "DeleteButton", "width": "10%" },
-                  { "data": "ShareButton", "width": "10%" },
-                  { "data": "Period", "width": "10%" },
-                  { "data": "StartDate", "width": "10%" },
-                  { "data": "EndDate", "width": "10%" },
-                  { "data": "Text", "width": "40%"}]
+        columns: [{ "data": "EditButton", "width": "8%", "orderable": false },
+                  { "data": "DeleteButton", "width": "8%", "orderable": false },
+                  { "data": "ShareButton", "width": "8%", "orderable": false  },
+                  { "data": "LastSaved", "width": "8%", "orderable": true  },
+                  { "data": "Period", "width": "8%", "orderable": true  },
+                  { "data": "StartDate", "width": "8%", "orderable": true },
+                  { "data": "EndDate", "width": "8%", "orderable": true },
+                  { "data": "Text", "width": "44%", "orderable": true}]
     });
+
+    var table = $('#ars_table').DataTable();
+
+    // Sort by column 1 and then re-draw
+    table
+    .order([3, 'desc'])
+    .draw();
+
 }
 
 function DeleteAntiResolution(guid) {
@@ -421,7 +430,7 @@ function SaveAntiResolutions() {
     var authToken = localStorage.authToken;
     var guid = $("#hidGuid").val();
     var isPublic;
-    if ($('#chkPublic').attr('checked', true)) {
+    if ($('#chkPublic').is(':checked')) {
         isPublic = "True";
     } else {
         isPublic = "False";
@@ -466,5 +475,5 @@ function SaveError() {
 }
 
 function SaveAcknowledged() {
-    window.location.replace("/home");
+    window.location.replace("/myantiresolutions");
 }

@@ -13,6 +13,7 @@ namespace Site.JsonObjects
         public string Guid { get; set; }
         public string Period { get; set; }
         public string StartDate { get; set; }
+        public string LastSaved { get; set; }
         public string EndDate { get; set; }
         public string Text { get; set; }
         public string EditButton { get; set; }
@@ -42,6 +43,8 @@ namespace Site.JsonObjects
                 {
                     Period = _antiResolution.Period;
                 }
+
+                LastSaved = _antiResolution.LastModifiedDateTime.ToString("d");
 
                 if (_antiResolution.StartDate != null)
                 {
