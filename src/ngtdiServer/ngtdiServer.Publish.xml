@@ -22,7 +22,7 @@
     <file relUrl="Views/login.sshtml" publishTime="03/11/2015 04:08:41" />
     <file relUrl="Views/addantiresolution.sshtml" publishTime="01/19/2015 00:04:01" />
     <file relUrl="bin/Views/addantiresolution.sshtml" publishTime="01/19/2015 00:04:01" />
-    <file relUrl="js/app.js" publishTime="03/11/2015 02:00:17" />
+    <file relUrl="js/app.js" publishTime="03/11/2015 15:52:04" />
     <file relUrl="bin/tgNet.pdb" publishTime="03/11/2015 03:06:15" />
     <file relUrl="Views/home.sshtml" publishTime="12/03/2014 03:32:49" />
     <file relUrl="bin/Style/public.css" publishTime="01/18/2015 20:21:36" />
@@ -46,7 +46,7 @@
     <file relUrl="bin/Views/default.sshtml" publishTime="12/03/2014 05:45:04" />
     <file relUrl="bin/js/public.js" publishTime="01/18/2015 23:30:52" />
     <file relUrl="bin/Nancy.xml" publishTime="03/11/2015 01:06:43" />
-    <file relUrl="Views/myantiresolutions.sshtml" publishTime="03/11/2015 01:44:19" />
+    <file relUrl="Views/myantiresolutions.sshtml" publishTime="03/11/2015 15:51:36" />
     <file relUrl="Views/publicantiresolution.sshtml" publishTime="01/18/2015 21:44:17" />
     <file relUrl="Views/suggestion.sshtml" publishTime="01/16/2015 04:56:16" />
     <file relUrl="bin/Nancy.Hosting.Aspnet.dll" publishTime="03/11/2015 01:06:43" />
@@ -59,7 +59,7 @@
     <file relUrl="bin/Views/mastercustomtitle.sshtml" publishTime="12/22/2014 02:06:05" />
     <file relUrl="bin/Views/suggestion.sshtml" publishTime="01/16/2015 04:56:16" />
     <file relUrl="bin/Views/home.sshtml" publishTime="12/03/2014 03:32:49" />
-    <file relUrl="bin/js/app.js" publishTime="03/11/2015 02:00:17" />
+    <file relUrl="bin/js/app.js" publishTime="03/11/2015 15:52:04" />
     <file relUrl="Views/suggestionthankyou.sshtml" publishTime="01/16/2015 05:00:39" />
     <file relUrl="bin/ngtdiLibrary.dll" publishTime="03/11/2015 04:02:13" />
     <file relUrl="bin/Views/menu.sshtml" publishTime="01/16/2015 04:13:19" />
@@ -77,7 +77,7 @@
     <file relUrl="Views/menu.sshtml" publishTime="01/16/2015 04:13:19" />
     <file relUrl="bin/Style/app.css" publishTime="01/16/2015 04:49:50" />
     <file relUrl="bin/Views/changepassword.sshtml" publishTime="01/16/2015 04:13:19" />
-    <file relUrl="bin/Views/myantiresolutions.sshtml" publishTime="03/11/2015 01:44:19" />
+    <file relUrl="bin/Views/myantiresolutions.sshtml" publishTime="03/11/2015 15:51:36" />
     <file relUrl="bin/tgNet.dll" publishTime="03/11/2015 03:06:15" />
     <file relUrl="bin/Views/logout.sshtml" publishTime="12/03/2014 02:48:53" />
     <file relUrl="packages.config" publishTime="12/03/2014 02:28:42" />
